@@ -1,0 +1,21 @@
+{% extends "blog_app/base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<h2>All Blog Posts</h2>
+<div class="row">
+  {% for post in posts %}
+  <div class="col-md-6 mb-4">
+    <div class="card p-3 card-hover">
+      <h4>{{ post.title }}</h4>
+      <p>{{ post.content|truncatechars:120 }}</p>
+      <a href="{% url 'post-edit' post.pk %}" class="btn btn-outline-primary btn-sm btn-animate">Edit</a>
+      <a href="{% url 'post-delete' post.pk %}" class="btn btn-outline-danger btn-sm btn-animate">Delete</a>
+      <a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a>
+
+    </div>
+  </div>
+  {% empty %}
+  <p>No posts yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}
